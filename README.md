@@ -106,6 +106,3 @@ The goal of this project is to classify individuals into predefined **age groups
 - Hugging Face for providing pre-trained models and tokenizers.
 - PyTorch for its flexible and powerful deep learning framework.
 
----
-
-Feel free to customize further with your project details or include visuals, such as charts or sample embeddings! Let me know if you need help refining this further. 🚀

@@ -1,11 +1,15 @@
-# **Age Group Prediction Using Contextual Embeddings**
+# Author age group predictions based on the blogs written, gender, and occupation
 
-This project leverages **DistilBERT contextual embeddings** and additional categorical features (gender and occupation) to predict age groups using a neural network. The pipeline involves text preprocessing, feature integration, and model training with early stopping for efficient and robust classification.
+- The project aims to model the author's age group based on the writing content, gender, and occupation. 
+- This is still an active area of research in Natural Language Understanding. 
+- We've also done a comparative analysis of static (GloVe 200) vs contextual embeddings (DistilBERT), to see its effect on the model performance (either classical ML models or Fully Connected Neural Networks).
+- The pipeline involves text preprocessing, feature integration, and model training with early stopping for efficient and robust classification.
+- The entire code is a PyTorch modular implementation.
+- To enable accelerated training, the modeling was done on the NVIDIA GeForce RTX 2060 employing CUDA toolkit.
 
 ---
 
 ## **Table of Contents**
-- [Project Overview](#project-overview)
 - [Dataset](#dataset)
 - [Approach](#approach)
 - [Model Architecture](#model-architecture)
@@ -16,36 +20,60 @@ This project leverages **DistilBERT contextual embeddings** and additional categ
 
 ---
 
-## **Project Overview**
-The goal of this project is to classify individuals into predefined **age groups** based on their textual data, gender, and occupation. The project explores the power of **state-of-the-art embeddings** from DistilBERT combined with additional features to enhance predictive accuracy.
-
----
-
 ## **Dataset**
+https://www.kaggle.com/datasets/rtatman/blog-authorship-corpus
+
+The Blog Authorship Corpus consists of the collected posts of 19,320 bloggers gathered from blogger.com in August 2004. The corpus incorporates a total of 681,288 posts and over 140 million words - or approximately 35 posts and 7250 words per person.
+
 - **Features Used**:
   - Cleaned text data.
   - Gender (binary encoded).
-  - Occupation (target-encoded).  
+  
+![Gender Distribution in the authors](assets/gender_dist.jpg)
+
+  - Occupation (target-encoded).
+
+![Distribution based on the occupation](assets/occupation.jpg)
 
 - **Target**:
   - Multi-class age group classification:
     - Adolescents (13–17)
     - Young Adults (18–30)
     - Adults (31+)
+    
+![Distribution based on the age groups](assets/eda.jpg)
 
 ---
 
 ## **Approach**
 1. **Text Preprocessing**:
    - Removed noise like URLs, HTML tags, and special characters.
-   
-2. **Embedding Generation**:
-   - Used **DistilBERT** to generate 768-dimensional sentence embeddings.
 
-3. **Feature Integration**:
-   - Combined contextual embeddings with encoded categorical features (gender and occupation).
+2. **Exploratory Data Analysis**
+
+![](assets/wc_adolescents.jpg)
+
+![](assets/wc_adults.jpg)
+
+![](assets/wc_young_adults.jpg)
+
+
+3. **Embedding Generation**:
+   We explored two methods for generating embeddings to represent the text data effectively:
+
+    1. Static Embeddings using GloVe (200-Dimensional)
+      GloVe (Global Vectors for Word Representation) generates a 200-dimensional vector representation for every word in the vocabulary. These embeddings are then combined with encoded features for gender and occupation to enhance the representation.
+      Advantage: GloVe provides a simple yet effective way to represent words based on their co-occurrence statistics.
+      Limitation: Static embeddings like GloVe do not capture context effectively, as the representation of a word remains the same regardless of its usage in different contexts.
+    2. Contextual Embeddings using DistilBERT
+      DistilBERT, a lightweight version of BERT, generates contextual embeddings where the vector representation of a word depends on its surrounding context in the sentence. This helps capture nuanced meanings and relationships in the text.
+      Advantage: Contextual embeddings offer a deeper understanding of word meanings based on their context, making them highly effective for tasks like author profiling.
+      Limitation: Requires more computational resources compared to static embeddings like GloVe.
+
+    By leveraging these two approaches, we compared their performance in profiling authors and observed the trade-offs between simplicity and contextual understanding in embeddings.
 
 4. **Model Training**:
+   Classical Machine Learning models were used alongside Deep Learning Architectures for a more comprehensive understanding. Although, the below model yielded the best results:
    - Built a Fully Connected Neural Network (FCNN) with early stopping.
    - Used **CrossEntropyLoss** for multi-class classification.
 
@@ -62,7 +90,7 @@ The goal of this project is to classify individuals into predefined **age groups
 ---
 
 ## **Results**
-- **Accuracy**: Achieved a test accuracy of **62.59%**, outperforming the random baseline of 33.33%.  
+- **Accuracy**: Achieved a test accuracy of **~68%**, outperforming the random baseline of 33.33%.  
 - **Key Insights**:
   - DistilBERT embeddings significantly improved performance.
   - Including gender and occupation enhanced model predictions.  

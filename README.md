@@ -1,9 +1,12 @@
-# **Author age group predictions based on the blogs written, gender, and occupation**
+# Author age group predictions based on the blogs written, gender, and occupation
 
-The project aims to model the author's age group based on the writing content, gender, and occupation. This is still an active area of research in Natural Language Understanding. 
-We've also done a comparative analysis of static (GloVe 200) vs contextual embeddings (DistilBERT), to see its effect on the model performance (either classical ML models or Fully Connected Neural Networks).
-The pipeline involves text preprocessing, feature integration, and model training with early stopping for efficient and robust classification.
-**The entire code is a PyTorch modular implementation. Also, for enabling accelerated training, the modeling was done on the NVIDIA GeForce RTX 2060 employing CUDA toolkit. **
+- The project aims to model the author's age group based on the writing content, gender, and occupation. 
+- This is still an active area of research in Natural Language Understanding. 
+- We've also done a comparative analysis of static (GloVe 200) vs contextual embeddings (DistilBERT), to see its effect on the model performance (either classical ML models or Fully Connected Neural Networks).
+- The pipeline involves text preprocessing, feature integration, and model training with early stopping for efficient and robust classification.
+- The entire code is a PyTorch modular implementation.
+- To enable accelerated training, the modeling was done on the NVIDIA GeForce RTX 2060 employing CUDA toolkit.
+
 ---
 
 ## **Table of Contents**
@@ -24,10 +27,12 @@ The Blog Authorship Corpus consists of the collected posts of 19,320 bloggers ga
 
 - **Features Used**:
   - Cleaned text data.
-  - Gender (binary encoded). 
+  - Gender (binary encoded).
+  
 ![Gender Distribution in the authors](assets/gender_dist.jpg)
 
   - Occupation (target-encoded).
+
 ![Distribution based on the occupation](assets/occupation.jpg)
 
 - **Target**:
@@ -35,6 +40,7 @@ The Blog Authorship Corpus consists of the collected posts of 19,320 bloggers ga
     - Adolescents (13–17)
     - Young Adults (18–30)
     - Adults (31+)
+    
 ![Distribution based on the age groups](assets/eda.jpg)
 
 ---
@@ -71,7 +77,6 @@ The Blog Authorship Corpus consists of the collected posts of 19,320 bloggers ga
    - Built a Fully Connected Neural Network (FCNN) with early stopping.
    - Used **CrossEntropyLoss** for multi-class classification.
 
-    **The entire code is a PyTorch modular implementation. Also, for enabling accelerated training, the modeling was done on the NVIDIA GeForce RTX 2060 employing CUDA toolkit. **
 ---
 
 ## **Model Architecture**
@@ -85,7 +90,7 @@ The Blog Authorship Corpus consists of the collected posts of 19,320 bloggers ga
 ---
 
 ## **Results**
-- **Accuracy**: Achieved a test accuracy of **62.59%**, outperforming the random baseline of 33.33%.  
+- **Accuracy**: Achieved a test accuracy of **~68%**, outperforming the random baseline of 33.33%.  
 - **Key Insights**:
   - DistilBERT embeddings significantly improved performance.
   - Including gender and occupation enhanced model predictions.  

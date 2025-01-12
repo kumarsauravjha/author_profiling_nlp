@@ -3,7 +3,7 @@
 The project aims to model the author's age group based on the writing content, gender, and occupation. This is still an active area of research in Natural Language Understanding. 
 We've also done a comparative analysis of static (GloVe 200) vs contextual embeddings (DistilBERT), to see its effect on the model performance (either classical ML models or Fully Connected Neural Networks).
 The pipeline involves text preprocessing, feature integration, and model training with early stopping for efficient and robust classification.
-
+**The entire code is a PyTorch modular implementation. Also, for enabling accelerated training, the modeling was done on the NVIDIA GeForce RTX 2060 employing CUDA toolkit. **
 ---
 
 ## **Table of Contents**
@@ -52,16 +52,26 @@ The Blog Authorship Corpus consists of the collected posts of 19,320 bloggers ga
 ![](assets/wc_young_adults.jpg)
 
 
-4. **Embedding Generation**:
-   - Used **DistilBERT** to generate 768-dimensional sentence embeddings.
+3. **Embedding Generation**:
+   We explored two methods for generating embeddings to represent the text data effectively:
 
-5. **Feature Integration**:
-   - Combined contextual embeddings with encoded categorical features (gender and occupation).
+    1. Static Embeddings using GloVe (200-Dimensional)
+      GloVe (Global Vectors for Word Representation) generates a 200-dimensional vector representation for every word in the vocabulary. These embeddings are then combined with encoded features for gender and occupation to enhance the representation.
+      Advantage: GloVe provides a simple yet effective way to represent words based on their co-occurrence statistics.
+      Limitation: Static embeddings like GloVe do not capture context effectively, as the representation of a word remains the same regardless of its usage in different contexts.
+    2. Contextual Embeddings using DistilBERT
+      DistilBERT, a lightweight version of BERT, generates contextual embeddings where the vector representation of a word depends on its surrounding context in the sentence. This helps capture nuanced meanings and relationships in the text.
+      Advantage: Contextual embeddings offer a deeper understanding of word meanings based on their context, making them highly effective for tasks like author profiling.
+      Limitation: Requires more computational resources compared to static embeddings like GloVe.
 
-6. **Model Training**:
+    By leveraging these two approaches, we compared their performance in profiling authors and observed the trade-offs between simplicity and contextual understanding in embeddings.
+
+4. **Model Training**:
+   Classical Machine Learning models were used alongside Deep Learning Architectures for a more comprehensive understanding. Although, the below model yielded the best results:
    - Built a Fully Connected Neural Network (FCNN) with early stopping.
    - Used **CrossEntropyLoss** for multi-class classification.
 
+    **The entire code is a PyTorch modular implementation. Also, for enabling accelerated training, the modeling was done on the NVIDIA GeForce RTX 2060 employing CUDA toolkit. **
 ---
 
 ## **Model Architecture**

@@ -24,12 +24,11 @@ The Blog Authorship Corpus consists of the collected posts of 19,320 bloggers ga
 
 - **Features Used**:
   - Cleaned text data.
-  - Gender (binary encoded).
-  - 
- ![Gender Distribution in the authors](assets/gender_dist.jpg)
+  - Gender (binary encoded). 
+![Gender Distribution in the authors](assets/gender_dist.jpg)
 
   - Occupation (target-encoded).
-  ![Distribution based on the occupation](assets/occupation.jpg)
+![Distribution based on the occupation](assets/occupation.jpg)
 
 - **Target**:
   - Multi-class age group classification:
@@ -37,19 +36,29 @@ The Blog Authorship Corpus consists of the collected posts of 19,320 bloggers ga
     - Young Adults (18–30)
     - Adults (31+)
 ![Distribution based on the age groups](assets/eda.jpg)
+
 ---
 
 ## **Approach**
 1. **Text Preprocessing**:
    - Removed noise like URLs, HTML tags, and special characters.
-   
-2. **Embedding Generation**:
+
+2. **Exploratory Data Analysis**
+
+![](assets/wc_adolescents.jpg)
+
+![](assets/wc_adults.jpg)
+
+![](assets/wc_young_adults.jpg)
+
+
+4. **Embedding Generation**:
    - Used **DistilBERT** to generate 768-dimensional sentence embeddings.
 
-3. **Feature Integration**:
+5. **Feature Integration**:
    - Combined contextual embeddings with encoded categorical features (gender and occupation).
 
-4. **Model Training**:
+6. **Model Training**:
    - Built a Fully Connected Neural Network (FCNN) with early stopping.
    - Used **CrossEntropyLoss** for multi-class classification.
 

@@ -1,11 +1,12 @@
-# **Age Group Prediction Using Contextual Embeddings**
+# **Author age group predictions based on the blogs written, gender, and occupation**
 
-This project leverages **DistilBERT contextual embeddings** and additional categorical features (gender and occupation) to predict age groups using a neural network. The pipeline involves text preprocessing, feature integration, and model training with early stopping for efficient and robust classification.
+The project aims to model the author's age group based on the writing content, gender, and occupation. This is still an active area of research in Natural Language Understanding. 
+We've also done a comparative analysis of static (GloVe 200) vs contextual embeddings (DistilBERT), to see its effect on the model performance (either classical ML models or Fully Connected Neural Networks).
+The pipeline involves text preprocessing, feature integration, and model training with early stopping for efficient and robust classification.
 
 ---
 
 ## **Table of Contents**
-- [Project Overview](#project-overview)
 - [Dataset](#dataset)
 - [Approach](#approach)
 - [Model Architecture](#model-architecture)
@@ -16,23 +17,26 @@ This project leverages **DistilBERT contextual embeddings** and additional categ
 
 ---
 
-## **Project Overview**
-The goal of this project is to classify individuals into predefined **age groups** based on their textual data, gender, and occupation. The project explores the power of **state-of-the-art embeddings** from DistilBERT combined with additional features to enhance predictive accuracy.
-
----
-
 ## **Dataset**
+https://www.kaggle.com/datasets/rtatman/blog-authorship-corpus
+
+The Blog Authorship Corpus consists of the collected posts of 19,320 bloggers gathered from blogger.com in August 2004. The corpus incorporates a total of 681,288 posts and over 140 million words - or approximately 35 posts and 7250 words per person.
+
 - **Features Used**:
   - Cleaned text data.
   - Gender (binary encoded).
-  - Occupation (target-encoded).  
+  - 
+ ![Gender Distribution in the authors](assets/gender_dist.jpg)
+
+  - Occupation (target-encoded).
+  ![Distribution based on the occupation](assets/occupation.jpg)
 
 - **Target**:
   - Multi-class age group classification:
     - Adolescents (13–17)
     - Young Adults (18–30)
     - Adults (31+)
-
+![Distribution based on the age groups](assets/eda.jpg)
 ---
 
 ## **Approach**
